@@ -15,6 +15,8 @@ import streamlit as st
 import numpy as np
 import joblib
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 
 # Ganti path sesuai lokasi file kamu di Drive
@@ -78,3 +80,24 @@ if st.button("🔍 Prediksi"):
         st.error(f"⚠️ Hasil: Kemungkinan **TERDIAGNOSA** diabetes ({prob*100:.2f}%)")
     else:
         st.success(f"✅ Hasil: Kemungkinan **TIDAK TERDIAGNOSA** diabetes ({(1-prob)*100:.2f}%)")
+
+# Visualisasi Dataset Contoh
+st.header("📊 Visualisasi Data")
+try:
+    df = pd.read_csv("diabetes.csv")  # pastikan file ada di repo
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.subheader("Distribusi Usia")
+        fig_age, ax1 = plt.subplots()
+        sns.histplot(df["Age"], bins=20, kde=True, ax=ax1, color="skyblue")
+        st.pyplot(fig_age)
+
+    with col2:
+        st.subheader("Distribusi BMI")
+        fig_bmi, ax2 = plt.subplots()
+        sns.histplot(df["BMI"], bins=20, kde=True, ax=ax2, color="salmon")
+        st.pyplot(fig_bmi)
+
+except FileNotFoundError:
+    st.warning("File `diabetes.csv` tidak ditemukan. Visualisasi tidak dapat ditampilkan.")
