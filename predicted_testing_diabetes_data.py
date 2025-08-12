@@ -21,19 +21,28 @@ import plotly.graph_objects as go
 model = joblib.load("xgb_diabetes_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
+st.sidebar.title("👩‍💻 Profil")
+st.sidebar.image("https://via.placeholder.com/150", caption="Oktavindy")
+st.sidebar.markdown("""
+**Nama:** Oktavindy  
+**Bio:** Aspiring Data Scientist | Data Enthusiast with Background in Logistics, Insurance & Mandarin Communication | Currently in Data Science Bootcamp at Dibimbing.id  
+**Kontak:** [📧 Email](mailto:ooktavindy@gmail.com)
+""")
+
+
 st.set_page_config(page_title="Prediksi Diabetes", page_icon="🩺")
 st.title("🩺 Prediksi Diabetes")
 st.write("Masukkan data kesehatan Anda sesuai petunjuk di bawah ini 👇")
 
 # Input sliders
-pregnancies = st.slider("🤰 Jumlah Kehamilan", 0, 15, 0, help="Biasanya 0–15 kali dalam dataset")
+pregnancies = st.slider("🤰 Jumlah Kehamilan", 0, 15, 0, help="Jumlah kehamilan yang pernah dialami")
 glucose = st.slider("🍬 Glukosa (mg/dL)", 50, 200, 100, help="Normal: 70–140 mg/dL")
 blood_pressure = st.slider("🫀 Tekanan Darah (mmHg)", 40, 140, 80, help="Normal: 80–120 mmHg")
 skin_thickness = st.slider("📏 Ketebalan Lipatan Kulit (mm)", 0, 100, 20, help="Biasanya 10–50 mm")
 insulin = st.slider("💉 Insulin (mu U/ml)", 0, 900, 80, help="Normal: 16–166 mu U/ml")
 bmi = st.slider("⚖️ BMI", 10.0, 60.0, 25.0, 0.1, help="Normal: 18.5–24.9")
 dpf = st.slider("📊 Diabetes Pedigree Function", 0.0, 2.5, 0.5, 0.01, help="Semakin tinggi, semakin besar kemungkinan memiliki riwayat keluarga diabetes")
-age = st.slider("🎂 Usia", 10, 100, 30, help="Umumnya 21–80 tahun pada dataset")
+age = st.slider("🎂 Usia", 10, 100, 30, help="Usia pasien (tahun)")
 
 # Prediksi
 if st.button("🔍 Prediksi"):
