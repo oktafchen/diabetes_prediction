@@ -22,7 +22,6 @@ model = joblib.load("xgb_diabetes_model.pkl")
 scaler = joblib.load("scaler.pkl")
 
 st.sidebar.title("👩‍💻 Profil")
-st.sidebar.image("https://via.placeholder.com/150", caption="Oktavindy")
 st.sidebar.markdown("""
 **Nama:** Oktavindy  
 **Bio:** Aspiring Data Scientist | Data Enthusiast with Background in Logistics, Insurance & Mandarin Communication | Currently in Data Science Bootcamp at Dibimbing.id  
