@@ -84,20 +84,54 @@ if st.button("🔍 Prediksi"):
 # Visualisasi Dataset Contoh
 st.header("📊 Visualisasi Data")
 try:
-    df = pd.read_csv("diabetes.csv")  # pastikan file ada di repo
-    col1, col2 = st.columns(2)
+    df = pd.read_csv("diabetes.csv") 
+    st.write("Visualisasi ini membantu memahami hubungan antar variabel dan bagaimana kadar glukosa berbeda pada pasien dengan dan tanpa diabetes.")
+    # 1️⃣ Heatmap Korelasi Antar Variabel
+    st.subheader("🔍 Korelasi Antar Variabel")
+    corr = df.corr()
+    fig, ax = plt.subplots(figsize=(8,6))
+    sns.heatmap(corr, annot=True, cmap='coolwarm', ax=ax)
+    st.pyplot(fig)
 
-    with col1:
-        st.subheader("Distribusi Usia")
-        fig_age, ax1 = plt.subplots()
-        sns.histplot(df["Age"], bins=20, kde=True, ax=ax1, color="skyblue")
-        st.pyplot(fig_age)
+    st.caption("Heatmap ini menunjukkan hubungan antar variabel pada dataset. "
+           "Kadar glukosa, BMI, dan usia terlihat memiliki korelasi yang cukup tinggi dengan status diabetes.")
 
-    with col2:
-        st.subheader("Distribusi BMI")
-        fig_bmi, ax2 = plt.subplots()
-        sns.histplot(df["BMI"], bins=20, kde=True, ax=ax2, color="salmon")
-        st.pyplot(fig_bmi)
+    # 2️⃣ Boxplot Kadar Glukosa Berdasarkan Status Diabetes
+    st.subheader("💉 Perbandingan Kadar Glukosa")
+    fig, ax = plt.subplots()
+    sns.boxplot(x='Outcome', y='Glucose', data=df, palette='Set2', ax=ax)
+    ax.set_xticklabels(['Tidak Diabetes', 'Diabetes'])
+    ax.set_xlabel('Status Diabetes')
+    ax.set_ylabel('Kadar Glukosa')
+    st.pyplot(fig)
+
+    st.caption("Boxplot ini memperlihatkan bahwa pasien dengan diabetes (Outcome = 1) "
+            "cenderung memiliki kadar glukosa yang jauh lebih tinggi dibandingkan pasien tanpa diabetes.")
+    # st.subheader("Distribusi Kadar Glukosa")
+    # fig, ax = plt.subplots()
+    # sns.histplot(df['Glucose'], bins=30, kde=True, color='purple', ax=ax)
+    # ax.set_title('Distribusi Kadar Glukosa')
+    # ax.set_xlabel('Kadar Glukosa')
+    # ax.set_ylabel('Jumlah Pasien')
+    # st.pyplot(fig)
+
+    # st.caption("Grafik ini menunjukkan distribusi kadar glukosa pada dataset pasien. \
+    # Sebagian besar pasien memiliki kadar glukosa antara 90–130, sedangkan kadar di atas 150 \
+    # umumnya berkaitan dengan risiko diabetes yang lebih tinggi.")
+     # pastikan file ada di repo
+    # col1, col2 = st.columns(2)
+
+    # with col1:
+    #     st.subheader("Distribusi Usia")
+    #     fig_age, ax1 = plt.subplots()
+    #     sns.histplot(df["Age"], bins=20, kde=True, ax=ax1, color="skyblue")
+    #     st.pyplot(fig_age)
+
+    # with col2:
+    #     st.subheader("Distribusi BMI")
+    #     fig_bmi, ax2 = plt.subplots()
+    #     sns.histplot(df["BMI"], bins=20, kde=True, ax=ax2, color="salmon")
+    #     st.pyplot(fig_bmi)
 
 except FileNotFoundError:
     st.warning("File `diabetes.csv` tidak ditemukan. Visualisasi tidak dapat ditampilkan.")
