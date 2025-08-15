@@ -28,6 +28,7 @@ st.sidebar.markdown("""
 **Nama:** Oktavindy  
 **Bio:** Aspiring Data Scientist | Data Enthusiast with Background in Logistics, Insurance & Mandarin Communication | Currently in Data Science Bootcamp at Dibimbing.id  
 **Kontak:** [📧 Email](mailto:ooktavindy@gmail.com)
+**GitHub:** [Klik di sini](https://github.com/oktafchen/diabetes_prediction)
 """)
 
 
